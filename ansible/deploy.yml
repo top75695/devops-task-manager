@@ -1,0 +1,31 @@
+
+---
+- name: Deploy Task Manager using Docker
+  hosts: local
+  become: false
+
+  tasks:
+    - name: Ensure Docker is available
+      command: docker --version
+      register: docker_version
+      changed_when: false
+
+    - name: Display Docker version
+      debug:
+        msg: "{{ docker_version.stdout }}"
+
+    - name: Start Task Manager using Docker Compose
+      command: docker compose up -d
+      args:
+        chdir: "{{ playbook_dir }}/.."
+
+    - name: Check running containers
+      command: docker compose ps
+      args:
+        chdir: "{{ playbook_dir }}/.."
+      register: containers
+      changed_when: false
+
+    - name: Display deployment status
+      debug:
+        var: containers.stdout_lines

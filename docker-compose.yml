@@ -1,0 +1,8 @@
+
+services:
+  task-manager:
+    build: .
+    container_name: task-manager-compose
+    ports:
+      - "5002:5000"
+    restart: unless-stopped

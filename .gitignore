@@ -5,3 +5,15 @@ __pycache__/
 .env
 .idea/
 .vscode/
+# Kubernetes and downloaded binaries
+kubectl
+minikube-linux-amd64
+task-manager.tar
+
+# Python
+venv/
+__pycache__/
+.pytest_cache/
+
+# Build artifacts
+build/
