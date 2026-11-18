@@ -16,3 +16,5 @@ A Flask REST API built for the DevOps assignment.
 - Docker
 - Ansible
 - Kubernetes
+
+CI Pipeline: Jenkins automated build verified.
