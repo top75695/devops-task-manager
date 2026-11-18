@@ -53,3 +53,11 @@ def test_add_task(client):
 def test_invalid_task(client):
     response = client.post("/tasks", json={})
     assert response.status_code == 400
+def test_update_task(client):
+    response = client.patch(
+        "/tasks/1",
+        json={"completed": True}
+    )
+
+    assert response.status_code == 200
+    assert response.json["completed"] is True

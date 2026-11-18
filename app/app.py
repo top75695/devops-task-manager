@@ -52,7 +52,26 @@ def add_task():
 
     return jsonify(new_task), 201
 
+@app.route("/tasks/<int:task_id>", methods=["PATCH"])
+def update_task(task_id):
+    data = request.get_json(silent=True)
 
+    if not isinstance(data, dict):
+        return jsonify({"error": "Invalid JSON"}), 400
+
+    for task in tasks:
+        if task["id"] == task_id:
+            if "completed" in data:
+                if not isinstance(data["completed"], bool):
+                    return jsonify({
+                        "error": "completed must be a boolean"
+                    }), 400
+
+                task["completed"] = data["completed"]
+
+            return jsonify(task), 200
+
+    return jsonify({"error": "Task not found"}), 404
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000)
 
